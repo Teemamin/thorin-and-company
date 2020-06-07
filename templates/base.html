@@ -3,10 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/clean-blog.min.css') }}">
     <title>Document</title>
   </head>
   <body>
-    <nav>
+    <nav class="navbar">
       <ul>
         <li><a href="{{ url_for('index') }}">Home page</a></li>
         <li><a href="{{ url_for('about') }}">About page</a></li>
@@ -17,5 +19,9 @@
     <h1>Home page</h1>
     {% endblock %}
     <!--The curly bracket and percentage are for statements that control the flow of our template.-->
+    {% block updates %}
+    <p> some text to test my app </p>
+    <a href="#">some link </a>
+    {% endblock %}
   </body>
 </html>

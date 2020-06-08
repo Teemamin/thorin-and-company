@@ -22,8 +22,8 @@ And that shows us exactly which iteration of the loop we're on.-->
 <!--So just like for loops, if statements in our templates go with the curly bracket and % notation because they are logic.-->
  {% if loop.index % 2 != 0 %}
   <div class="col-md-7">
-  {{loop.index}}
-    <h3>{{member.name}}</h3>
+  
+    <h3><a href="/about/{{member.url}}"> {{loop.index}}. {{member.name}} </a></h3>
     <p>
       {{member.description}} <!--the names has to conrespond with the name in the json file eg the desciption,name ,image_source but note that the member is just a variable name(item) for the for loop-->
     </p>
@@ -38,8 +38,8 @@ If it's an even number, we display the image first and then the text.-->
     <img class="featurette-image img-responsive" src= "{{ member.image_source }}"/>
   </div>
     <div class="col-md-7">
-  {{loop.index}}
-    <h3>{{member.name}}</h3>
+  
+    <h3><a href="/about/{{member.url}}"> {{loop.index}}. {{member.name}} </a></h3>
     <p>
       {{member.description}} <!--the names has to conrespond with the name in the json file eg the desciption,name ,image_source but note that the member is just a variable name(item) for the for loop-->
     </p>

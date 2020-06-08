@@ -1,6 +1,7 @@
 import os
 import json
-from flask import Flask, render_template
+from flask import Flask, render_template, request  # request handles things like finding out wat method we used
+# and returning our form object wen submitted.
 
 app = Flask(__name__) 
 # we can use __name__ which is a built-in Python variable. Flask needsthis so that it knows where to look for templates and static files. 
@@ -22,9 +23,33 @@ def about():
         data = json.load(json_data)
     return render_template("about.html", pagetitle = "About" , company = data)
 
-@app.route("/contact")
+
+@app.route("/about/<member_name>")
+
+ # So whenever we look at our about URL with something after it, that's going to be passed in to this view.  
+
+
+def about_member(member_name):
+    member = {}
+
+    with open ("data/company.json", "r") as json_data:
+        data = json.load(json_data)
+        for obj in data :
+            if obj["url"] == member_name:
+                member = obj
+    return render_template("member.html", member = member) # member = member, cos that is how we refer to it inside our template
+
+
+
+
+
+@app.route("/contact", methods = ["GET", "POST"])
+# by default flask view handles GET request but if we need to use other methods like POST or DELETE etc
+# we will have to explicitly state that out route can accept that
 
 def contact():
+    if request.method == "POST":
+        print(request.form)
     return render_template("contact.html", pagetitle = "Contact")
 
 @app.route("/career")

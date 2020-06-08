@@ -1,7 +1,6 @@
 {% extends "base.html" %} {% block content %}
-
-{{ company}}
-<h2>{{pagetitle}}</h2>
+ 
+ <h2>{{pagetitle}}</h2>
 <p>
   The formation of the group grew out of a meeting Gandalf had with Thorin in
   Bree which kindled Thorin's interest in recapturing his long lost family
@@ -14,88 +13,41 @@
   considered thirteen to be an unlucky number, and as Gandalf had planned to
   leave on other business, welcomed a fourteenth to fill into their party.
 </p>
+ <!-- every time this for loop is evaluated, the HTML that's inside the for loop is going to be injected into our template. we dont have to hard code anthing cos it will be getting the data from our json file and looping through-->
+ {% for member in company %}
+ <!--when we create a for loop using the Jinja templating language, it also creates an object for us called loop.
+And that object loop has a property which is .index
+And that shows us exactly which iteration of the loop we're on.-->
 <div class="row featurette">
+<!--So just like for loops, if statements in our templates go with the curly bracket and % notation because they are logic.-->
+ {% if loop.index % 2 != 0 %}
   <div class="col-md-7">
-    <h3>Thorin</h3>
+  {{loop.index}}
+    <h3>{{member.name}}</h3>
     <p>
-      In the year TA 2746, Thorin II was born to Dwarven prince Thráin II in the
-      mountain city of The Lonely Mountain. Early in his youth, he and the other
-      Dwarves of the Lonely Mountain were forced to flee by the dragon Smaug in
-      TA 2770. While in exile, he quickly grew to become a capable warrior. This
-      was demonstrated when he participated in the Battle of Azanulbizar in TA
-      2799. He marched with one of the Dwarven armies beneath the East-gate of
-      Moria. At some point in the fighting, his shield broke, and using an oaken
-      tree branch found on the floor as a shield, he gained the epithet
-      "Oakenshield," which would remain with him even in death
+      {{member.description}} <!--the names has to conrespond with the name in the json file eg the desciption,name ,image_source but note that the member is just a variable name(item) for the for loop-->
     </p>
   </div>
   <div class="col-md-5">
-    <img
-      src="https://upload.wikimedia.org/wikipedia/en/e/ed/Thorin%2C_from_the_Hobbit.jpg"
-    />
+    <img class="featurette-image img-responsive" src= "{{ member.image_source }}"/>
   </div>
-</div>
-<div class="row featurette">
-  <div class="col-md-5">
-    <img
-      src="https://vignette.wikia.nocookie.net/lotr/images/b/b4/The-Hobbit-Fili-and-Kili.jpg/revision/latest/top-crop/width/360/height/450?cb=20110714202952"
-    />
+  <!--So if it's an odd number, then we display the text first and then the image.
+If it's an even number, we display the image first and then the text.-->
+   {% else %}
+     <div class="col-md-5">
+    <img class="featurette-image img-responsive" src= "{{ member.image_source }}"/>
   </div>
-  <div class="col-md-7">
-    <h3>Fili &amp; Killi</h3>
+    <div class="col-md-7">
+  {{loop.index}}
+    <h3>{{member.name}}</h3>
     <p>
-      Fili and Kíli were nephews of Thorin, who was the elder brother of their
-      mother Dís. They were also nephews of Frerin, grandsons of Thráin II, and
-      great-grandsons of Thrór. Fíli's most distinguishing feature was his long
-      nose, the longest of any of the Dwarves in Thorin's company.[2] As the
-      youngest Dwarves, Fíli and Kíli had the sharpest eyes, and were often sent
-      scouting or searching. It was they that found the Front Porch while in the
-      Misty Mountains.[3]
+      {{member.description}} <!--the names has to conrespond with the name in the json file eg the desciption,name ,image_source but note that the member is just a variable name(item) for the for loop-->
     </p>
   </div>
-</div>
-<div class="row featurette">
-  <div class="col-md-7">
-    <h3>Óin</h3>
-    <p>
-      Oni was the older brother of Glóin, cousin of Dwalin and Balin, and uncle
-      of Gimli. He usually wore a brown-hooded cloak when travelling. Óin fought
-      in the Battle of Azanulbizar along with Thorin Oakenshield, and in TA 2941
-      joined with Thorin and Company on the quest to reclaim the Lonely Mountain
-      wearing a brown hood.[2] Óin was one of the Dwarves who bet that Bilbo
-      would come along with them to reclaim the Lonely Mountain. Óin and his
-      brother Glóin were usually in charge of preparing the fire for the
-      Company. He fought in and survived the Battle of the Five Armies, and
-      later settled in the Lonely Mountain along with many other dwarves of The
-      Company of Thorin.
-    </p>
-  </div>
-  <div class="col-md-5">
-    <img
-      src="https://pbs.twimg.com/profile_images/3307780668/a68c778e06c5a514f5f0271a27dd8335_400x400.jpeg"
-    />
-  </div>
-</div>
-<div class="row featurette">
-  <div class="col-md-5">
-    <img
-      src="https://vignette.wikia.nocookie.net/lotr/images/f/fc/Gloin_2.jpg/revision/latest?cb=20120908171710"
-    />
-  </div>
-  <div class="col-md-7">
-    <h3>Gloin</h3>
-    <p>
-      In TA 2799, Glóin was known to have fought in the Battle of Azanulbizar,
-      the last battle of the War of the Dwarves and Orcs. In TA 2941, Glóin and
-      his brother Óin, along with his cousins Dwalin and Balin, were among the
-      Dwarves accompanying Thorin and Company during their quest to the Lonely
-      Mountain to recapture The Kingdom of Erebor from the Dragon Smaug. He was
-      noted for his skills with a tinderbox, and, along with his brother Óin,
-      was usually the one told to get a fire started whenever the Dwarves made
-      camp. Gloin also fought in the Battle of the Five Armies.
-    </p>
-  </div>
-  
-</div>
-
+   {% endif %}
+ </div>
+ {% if loop.index != 13 %} <!--the if statement will chk if the loop.index is not = 13 then display the horizontal rule if not it will display-->
+ <hr class="featurette-divider"> <!--the classes are provided by the clean blog template and bootstrap-->
+ {% endif %}
+ {% endfor %}
 {% endblock %}

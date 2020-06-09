@@ -3,6 +3,15 @@
     <h2>{{pagetitle}}</h2>
         <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
+      {% with  messages = get_flashed_messages()%} <!--the var messages is going to have the result of the get_flashed_messages function frm the backend-->
+        {% if messages %} <!--if there are messages-->
+        <ul class="flashes">
+           {% for message in messages %}
+           <li>{{message}}</li> <!--incase we have more than 1 message it will go tru them and display nicely with the html format-->
+           {% endfor %}
+        </ul>
+        {% endif%}
+        {% endwith %}
         <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>
         <form method="POST" name="sentMessage" id="contactForm" novalidate>
           <div class="control-group">

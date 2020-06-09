@@ -1,10 +1,13 @@
 import os
 import json
-from flask import Flask, render_template, request  # request handles things like finding out wat method we used
+from flask import Flask, render_template, request, flash
+ # request handles things like finding out wat method we used
 # and returning our form object wen submitted.
 
 app = Flask(__name__) 
 # we can use __name__ which is a built-in Python variable. Flask needsthis so that it knows where to look for templates and static files. 
+app.secret_key = "some_text"  # to use flashed message we need to create some secret key
+
 @app.route("/")
 # using the app.route decorator. In Python, a decorator starts with the @ sign, which is
 # also called pie notation. And, effectively, a decorator
@@ -49,7 +52,7 @@ def about_member(member_name):
 
 def contact():
     if request.method == "POST":
-        print(request.form)
+        flash("Thank you {} we have recived your message!" .format(request.form['name']))      
     return render_template("contact.html", pagetitle = "Contact")
 
 @app.route("/career")

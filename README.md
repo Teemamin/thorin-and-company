@@ -1,2 +1,2 @@
 ## Thorin and Company
-practical python class project
+practical python (flask)class project
